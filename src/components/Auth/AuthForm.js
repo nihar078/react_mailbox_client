@@ -52,7 +52,7 @@ const AuthForm = () => {
       password: password,
       confirmPassword: confirmPassword,
     };
-    // console.log(user);
+    console.log(user);
     setEmail("");
     setPassword("");
     setConfirmPassword("");
