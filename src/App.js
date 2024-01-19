@@ -4,6 +4,8 @@ import Header from "./components/Layout/Header";
 import MainNavigation from "./components/Layout/MainNavigation";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ComposeEmail from "./components/Mail/Compose";
+import Inbox from "./components/Mail/Inbox";
 
 function App() {
   const authRdx = useSelector((state) => state.auth);
@@ -23,6 +25,8 @@ function App() {
           }
         />
         <Route path="/auth" element={<AuthForm />} />
+        <Route path="/compose" element={<ComposeEmail />} />
+        {authRdx.isLoggedIn && <Route path="/inbox" element={<Inbox />} />}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {/* <Header /> */}

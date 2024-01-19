@@ -1,14 +1,16 @@
 import React from "react";
 import Home from "./Home";
+import SideBar from "./SideBar";
 
+const Header = () => {
+  return (
+    <div>
+      <header>
+        <Home />
+      </header>
+      <SideBar />
+    </div>
+  );
+};
 
-const Header = () =>{
-    return(
-        <header>
-            <Home />
-            <hr />
-        </header>
-    )
-}
-
-export default Header
+export default Header;
