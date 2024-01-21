@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import {EditorState} from "draft-js"
+import { EditorState } from "draft-js";
 import { useSelector } from "react-redux";
 import "./Compose.css";
 
@@ -12,7 +12,7 @@ const ComposeEmail = (props) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const userEmail = useSelector((state) => state.auth.email);
-    const fromEmail = userEmail ? userEmail.replace(/[@.]/g, "") : "";
+  const fromEmail = userEmail ? userEmail.replace(/[@.]/g, "") : "";
 
   const toHandler = (event) => {
     setToEmail(event.target.value);
@@ -23,30 +23,46 @@ const ComposeEmail = (props) => {
 
   const mailSubmitHandler = async (event) => {
     event.preventDefault();
+    const recevierEmail = toEmail.replace(/[@.]/g, "");
     const emailObj = {
       to: toEmail,
       from: userEmail,
       subject: subject,
       message: editorState.getCurrentContent().getPlainText(),
-      time: new Date(),
+      time: new Date().toISOString(),
     };
     console.log(emailObj);
-    const response = await fetch(`https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${fromEmail}.json`, {
+    // Save the email to the sender's "sent" folder
+    const response = await fetch(
+      `https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${fromEmail}/sent.json`,
+      {
         method: "POST",
         body: JSON.stringify(emailObj),
         headers: {
-            "Content-Type" : "application/json",
+          "Content-Type": "application/json",
         },
-    })
+      }
+    );
 
-    if(response.ok){
-        const data = await response.json()
-        console.log(data)
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    } else {
+      const data = await response.json();
+      console.log(data.error.message);
     }
-    else{
-        const data = await response.json()
-        console.log(data.error.message)
-    }
+
+    // Save the email to the receiver's "inbox" folder
+    await fetch(
+      `https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${recevierEmail}/inbox.json`,
+      {
+        method: "POST",
+        body: JSON.stringify(emailObj),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
   return (
     <Container>

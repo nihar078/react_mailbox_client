@@ -19,14 +19,21 @@ function App() {
           path="/home"
           element={
             <>
-              {authRdx.isLoggedIn && <Header />}
+              {authRdx.isLoggedIn && (
+                <>
+                  <Header />
+                  <Inbox />
+                </>
+              )}
               {!authRdx.isLoggedIn && <Navigate to="/auth" />}
             </>
           }
         />
         <Route path="/auth" element={<AuthForm />} />
         <Route path="/compose" element={<ComposeEmail />} />
-        {authRdx.isLoggedIn && <Route path="/inbox" element={<Inbox />} />}
+        {authRdx.isLoggedIn && (
+          <Route path="/inbox" element={<Navigate to="/home" />} />
+        )}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {/* <Header /> */}
