@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Stack } from "react-bootstrap";
 import ComposeEmail from "../Mail/Compose";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -29,12 +30,14 @@ const SideBar = () => {
         </Modal>
       </div>
       <div>
-        <Button
-          variant="light"
-          style={{ fontSize: "20px", fontWeight: "600", width: "125px" }}
-        >
-          Inbox
-        </Button>
+        <Link to="/inbox">
+          <Button
+            variant="light"
+            style={{ fontSize: "20px", fontWeight: "600", width: "125px" }}
+          >
+            Inbox
+          </Button>
+        </Link>
       </div>
       <div>
         <Button
