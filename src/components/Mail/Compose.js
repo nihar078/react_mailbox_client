@@ -5,10 +5,10 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import "./Compose.css";
-import { sentMailHandeler } from "../../store/mailActions";
+import { receiveMailHandler, sentMailHandeler } from "../../store/mailActions";
 
 const ComposeEmail = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [toEmail, setToEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -57,19 +57,21 @@ const ComposeEmail = (props) => {
 
     //  using redux and dispatch
 
-    dispatch(sentMailHandeler(fromEmail, emailObj))
+    await dispatch(sentMailHandeler(fromEmail, emailObj));
 
     // Save the email to the receiver's "inbox" folder
-    await fetch(
-      `https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${recevierEmail}/inbox.json`,
-      {
-        method: "POST",
-        body: JSON.stringify(emailObj),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // await fetch(
+    //   `https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${recevierEmail}/inbox.json`,
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify(emailObj),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+
+    await dispatch(receiveMailHandler(recevierEmail, emailObj));
   };
   return (
     <Container>

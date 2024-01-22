@@ -3,18 +3,18 @@ import "./Inbox.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Stack } from "react-bootstrap";
 import EmailBox from "./EmailBox";
-import { receiveMailHandler } from "../../store/mailActions";
+import { inboxHandler } from "../../store/mailActions";
 
 const Inbox = () => {
   // const [receivedEmails, setReceivedEmails] = useState([]);
   const userEmail = useSelector((state) => state.auth.email);
 
   const fromEmail = userEmail ? userEmail.replace(/[@.]/g, "") : "";
-  const receivedEmails = useSelector((state) => state.mail.reciveMail);
+  const receivedEmails = useSelector((state) => state.mail.reciveMails);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchReceivedEmails = async () => {
-      
+
       //   const response = await fetch(
       //     `https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${fromEmail}/inbox.json`
       //   );
@@ -31,7 +31,7 @@ const Inbox = () => {
       //     console.error("Failed to fetch received emails");
       //   }
 
-      await dispatch(receiveMailHandler(fromEmail));
+      await dispatch(inboxHandler(fromEmail));
     };
     fetchReceivedEmails();
   }, [dispatch, fromEmail]);
