@@ -46,10 +46,13 @@ const Inbox = () => {
           {reversedEmails.map((email) => (
             <EmailBox
               key={email.id}
+              id={email.id}
               title={email.from}
+              to={email.to}
               subject={email.subject}
               message={email.message}
               time={email.time}
+              isRead={email.isRead}
             />
           ))}
         </span>

@@ -18,7 +18,7 @@
 .emilRow_message{
     display: flex;
     flex: 0.3;
-    align-items: center;
+    /* align-items: center !important ; */
     width: 400px;
     text-overflow: ellipsis;
     padding-left: 5px;
@@ -34,4 +34,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.emailRead{
+    color: blue;
+    margin-right: 10px;
+    font-size: x-small;
 }

@@ -50,11 +50,12 @@ export const inboxHandler = (fromEmail) => {
 
 export const receiveMailHandler = (recevierEmail, emailObj) => {
   return async (dispatch) => {
+    const addExtraEmailObj = {isRead: false, ...emailObj}
     const response = await fetch(
       `https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${recevierEmail}/inbox.json`,
       {
         method: "POST",
-        body: JSON.stringify(emailObj),
+        body: JSON.stringify(addExtraEmailObj),
         headers: {
           Content_Type: "application/json",
         },
@@ -64,9 +65,36 @@ export const receiveMailHandler = (recevierEmail, emailObj) => {
       const data = await response.json();
     //   console.log(data);
     //   console.log(data.name);
-      const createMail = { id: data.name, ...emailObj };
+      const createMail = { id: data.name, ...addExtraEmailObj };
       console.log(createMail)
       dispatch(mailActions.setreciveMail(createMail));
     }
   };
 };
+
+export const markAsReadHandlerBE = (fromEmail, updated, emailId) =>{
+  return async (dispatch, getState) =>{
+    try {
+      const response = await fetch(`https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${fromEmail}/inbox/${emailId}.json`, {
+        method: "PUT",
+        body: JSON.stringify(updated),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if(response.ok){
+        const mail = getState();
+        // console.log(mail)
+        const emailIndex = mail.reciveMails.findIndex((email) => email.id === emailId)
+        if(emailIndex !== -1){
+          dispatch(mailActions.markAsReadSuccess({
+            id: emailId,
+            update: {isRead: true}
+          }))
+        }
+      }
+    } catch (error) {
+      
+    }
+  }
+}

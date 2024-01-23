@@ -12,7 +12,14 @@ const mailSlice = createSlice({
       state.reciveMails = action.payload;
     },
     setreciveMail(state, action) {
-      state.reciveMails = [...state.reciveMails, action.payload ];
+      state.reciveMails = [...state.reciveMails, action.payload];
+    },
+    markAsReadSuccess(state, action) {
+      state.reciveMails = state.reciveMails.map((email) =>
+        email.id === action.payload.id
+          ? { ...email, ...action.payload.update }
+          : email
+      );
     },
   },
 });

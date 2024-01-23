@@ -6,6 +6,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ComposeEmail from "./components/Mail/Compose";
 import Inbox from "./components/Mail/Inbox";
+import ShowMail from "./components/Mail/ShowMail";
 
 function App() {
   const authRdx = useSelector((state) => state.auth);
@@ -34,6 +35,15 @@ function App() {
         {authRdx.isLoggedIn && (
           <Route path="/inbox" element={<Navigate to="/home" />} />
         )}
+        <Route
+          path="/email/:id"
+          element={
+            <>
+              <Header />
+              <ShowMail />
+            </>
+          }
+        />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       {/* <Header /> */}

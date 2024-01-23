@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { Button, Modal, Stack } from "react-bootstrap";
 import ComposeEmail from "../Mail/Compose";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SideBar = () => {
   const [showModal, setShowModal] = useState(false);
+  const reciveMail = useSelector((state) => state.mail.reciveMails);
+
+  let totalUnreadMessage = "";
+  reciveMail.forEach((email) => {
+    if (!email.isRead) {
+      totalUnreadMessage++;
+    }
+  });
   const showComposeHandel = () => {
     setShowModal(true);
   };
@@ -36,6 +45,7 @@ const SideBar = () => {
             style={{ fontSize: "20px", fontWeight: "600", width: "125px" }}
           >
             Inbox
+            <span style={{ marginLeft: "10px" }}>{totalUnreadMessage}</span>
           </Button>
         </Link>
       </div>
