@@ -83,7 +83,7 @@ export const markAsReadHandlerBE = (fromEmail, updated, emailId) =>{
         }
       })
       if(response.ok){
-        const mail = getState();
+        const {mail} = getState();
         // console.log(mail)
         const emailIndex = mail.reciveMails.findIndex((email) => email.id === emailId)
         if(emailIndex !== -1){
@@ -92,9 +92,26 @@ export const markAsReadHandlerBE = (fromEmail, updated, emailId) =>{
             update: {isRead: true}
           }))
         }
+      }else{
+        throw new Error("Failed to mark email as read")
       }
     } catch (error) {
-      
+      console.error(error)
+    }
+  }
+}
+
+export const deleteMailHandler =(fromEmail, emailId)=>{
+  return async (dispatch) => {
+    const response = await fetch(`https://react-pra-jan-emailbox-default-rtdb.firebaseio.com/${fromEmail}/inbox/${emailId}.json`, {
+      method: "DELETE"
+    })
+    if(response.ok){
+      dispatch(mailActions.deleteMail(emailId))
+      console.log("mail Delete Succesfully from the server")
+    }
+    else{
+      console.error("something went wrong in the delete")
     }
   }
 }

@@ -40,3 +40,18 @@
     margin-right: 10px;
     font-size: x-small;
 }
+.emailRow:hover {
+    background-color: rgb(232, 238, 241);
+}
+.deleteLink{
+    visibility: hidden;
+}
+.emailRow:hover .deleteLink{
+    visibility: visible;
+}
+.time{
+    visibility: visible;
+}
+.emailRow:hover .time{
+    visibility: hidden;
+}

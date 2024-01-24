@@ -15,3 +15,17 @@ flex-direction: column;
     margin-left: 25px;
     margin-top: 5px;
 }
+.backNavigation{
+    text-decoration: none !important;
+    color: black !important;
+}
+.backNavigation:hover{
+    color: black;
+}
+.delNavigation{
+    text-decoration: none !important;
+    color: black !important;
+}
+.delNavigation:hover{
+    color: blue !important;
+}

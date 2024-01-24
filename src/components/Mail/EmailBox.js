@@ -4,8 +4,9 @@ import { GrCheckbox } from "react-icons/gr";
 import { CiStar } from "react-icons/ci";
 import { FaCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { markAsReadHandlerBE } from "../../store/mailActions";
+import { deleteMailHandler, markAsReadHandlerBE } from "../../store/mailActions";
 
 const EmailBox = (props) => {
   //   console.log(time);
@@ -38,6 +39,10 @@ const EmailBox = (props) => {
     };
     dispatch(markAsReadHandlerBE(fromEmail, updateemail, props.id));
   };
+
+  const deleteHandler = () =>{
+    dispatch(deleteMailHandler(fromEmail, props.id))
+  }
   return (
     <div>
       <Link
@@ -62,7 +67,19 @@ const EmailBox = (props) => {
             {/* <p>fiok</p> */}
             <p dangerouslySetInnerHTML={{ __html: props.message }}></p>
           </div>
-          <p style={{ position: "absolute", right: "0px" }}>{formattedTime}</p>
+          <p style={{ position: "absolute", right: "0px" }} className="time">{formattedTime}</p>
+          <Link
+            style={{
+              color: "red",
+              position: "absolute",
+              right: "1px",
+              fontSize: "30px",
+            }}
+            className="deleteLink"
+            onClick={deleteHandler}
+          >
+            <MdDelete />
+          </Link>
         </div>
       </Link>
     </div>
