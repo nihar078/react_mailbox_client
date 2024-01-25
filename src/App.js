@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import ComposeEmail from "./components/Mail/Compose";
 import Inbox from "./components/Mail/Inbox";
 import ShowMail from "./components/Mail/ShowMail";
+import SentBox from "./components/Mail/SentBox";
+import SentShowMail from "./components/Mail/SentMail/SentShowMail";
 
 function App() {
   const authRdx = useSelector((state) => state.auth);
@@ -41,6 +43,24 @@ function App() {
             <>
               <Header />
               <ShowMail />
+            </>
+          }
+        />
+        <Route
+          path="/sent"
+          element={
+            <>
+              <Header />
+              <SentBox />
+            </>
+          }
+        />
+        <Route
+          path="/sentmail/:id"
+          element={
+            <>
+              <Header />
+              <SentShowMail />
             </>
           }
         />
