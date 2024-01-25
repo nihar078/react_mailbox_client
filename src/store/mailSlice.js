@@ -6,7 +6,7 @@ const mailSlice = createSlice({
   initialState: initialMailState,
   reducers: {
     setSentMail(state, action) {
-      state.sentMails = action.payload;
+      state.sentMails = [...state.sentMails,action.payload];
     },
     setInbox(state, action) {
       state.reciveMails = action.payload;
@@ -21,13 +21,16 @@ const mailSlice = createSlice({
           : email
       );
     },
-    // deleteMail(state, action) {
-    //   state.reciveMails = state.reciveMails.filter(
-    //     (email) => email.id !== action.payload
-    //   );
-    // },
     deleteMail(state, action) {
       state.reciveMails = state.reciveMails.filter(
+        (email) => email.id !== action.payload
+      );
+    },
+    setSentbox(state, action) {
+      state.sentMails = action.payload;
+    },
+    deleteSentMail(state, action) {
+      state.sentMails = state.sentMails.filter(
         (email) => email.id !== action.payload
       );
     },

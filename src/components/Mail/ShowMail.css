@@ -1,5 +1,5 @@
 .showMail {
-margin-top: -150px;
+margin-top: -620px;
 margin-left: 180px;
 display: flex;
 flex-direction: column;
@@ -7,7 +7,7 @@ flex-direction: column;
 .mainMessagebg{
     border: 1px solid #ddd;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-    margin-left: -19px;
+    /* margin-left: -19px; */
 }
 .messageContact{
     display: flex;

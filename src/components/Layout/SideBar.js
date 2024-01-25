@@ -22,11 +22,21 @@ const SideBar = () => {
     setShowModal(false);
   };
   return (
-    <Stack direction="vertical">
+    <Stack
+      direction="vertical"
+      style={{
+        backgroundColor: "rgb(247, 247,247)",
+        width: "180px",
+        marginTop: "-16px",
+        height: "625px",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <div>
         <Button
           variant="secondary"
-          style={{ marginBottom: "0.5rem", fontSize: "20px", width: "140px" }}
+          style={{ marginBottom: "0.5rem", fontSize: "20px", width: "140px", marginTop: "10px" }}
           onClick={showComposeHandel}
         >
           Compose
@@ -50,12 +60,14 @@ const SideBar = () => {
         </Link>
       </div>
       <div>
-        <Button
-          variant="light"
-          style={{ fontSize: "20px", fontWeight: "600", width: "125px" }}
-        >
-          Sent
-        </Button>
+        <Link to="/sent">
+          <Button
+            variant="light"
+            style={{ fontSize: "20px", fontWeight: "600", width: "125px" }}
+          >
+            Sent
+          </Button>
+        </Link>
       </div>
     </Stack>
   );

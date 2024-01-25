@@ -1,0 +1,32 @@
+.sentShwMail{
+    margin-top: -620px;
+    margin-left: 180px;
+    display: flex;
+    flex-direction: column;
+}
+.sentMainMsgBg{
+  border: 1px solid #ddd;
+  /* margin-left: -19px; */
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.sentMsgCnt{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 25px;
+    margin-top: 5px;
+}
+.sentDelNav{
+    text-decoration: none !important;
+    color: black !important;
+}
+.sentDelNav:hover{
+    color: blue !important;
+}
+.sentBackNav{
+    text-decoration: none !important;
+    color: black !important;
+    justify-content: space-between !important;
+}
+.sentBackNav:hover{
+    color: black;
+}

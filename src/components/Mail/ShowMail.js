@@ -62,7 +62,7 @@ const ShowMail = () => {
         </Button>
       </div>
       <hr />
-      <h2>{email.subject}</h2>
+      <h2 style={{marginLeft: "10px"}}>{email.subject}</h2>
       <div className="mainMessagebg">
         <div className="messageContact">
           <span>
