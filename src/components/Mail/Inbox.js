@@ -33,7 +33,11 @@ const Inbox = () => {
 
       await dispatch(inboxHandler(fromEmail));
     };
-    fetchReceivedEmails();
+    fetchReceivedEmails()
+    const interval = setInterval(() => {
+      // fetchReceivedEmails();
+    }, 2000)
+    return () => clearInterval(interval)
   }, [dispatch, fromEmail]);
 
   // console.log(receivedEmails)
